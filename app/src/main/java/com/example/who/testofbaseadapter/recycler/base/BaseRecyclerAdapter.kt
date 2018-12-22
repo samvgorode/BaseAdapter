@@ -20,7 +20,7 @@ class BaseRecyclerAdapter<T> constructor() : RecyclerView.Adapter<BaseViewHolder
     private var replaceItemListener: ((item: T) -> Unit)? = null
     private var lastClickStamp: Long = 0L
 
-    private constructor(context: Context? = null, items: List<T>? = null, @LayoutRes layoutResId: Int) : this() {
+    private constructor(context: Context? = null, @LayoutRes layoutResId: Int) : this() {
         layoutInflater = LayoutInflater.from(context)
         this.layoutResId = layoutResId
         setHasStableIds(true)
@@ -103,14 +103,9 @@ class BaseRecyclerAdapter<T> constructor() : RecyclerView.Adapter<BaseViewHolder
     }
 
     inner class AdapterBuilder(private val context:Context) {
-        private var items: List<T>? = null
         @LayoutRes
         var layoutResId: Int = 0
         var holder: Class<*>? = null
-        fun setList(itemsIn: List<T>): AdapterBuilder {
-            items = itemsIn
-            return this
-        }
         inline fun <reified VH : BaseViewHolder<T>> setHolder(@LayoutRes layoutResIdIn: Int): AdapterBuilder {
             holder = VH::class.java
             layoutResId = layoutResIdIn
@@ -118,8 +113,8 @@ class BaseRecyclerAdapter<T> constructor() : RecyclerView.Adapter<BaseViewHolder
         }
         fun build(): BaseRecyclerAdapter<T>? {
             var adapter: BaseRecyclerAdapter<T>? = null
-            if (holder != null && items != null && layoutResId != 0) {
-                adapter = BaseRecyclerAdapter(context, items, layoutResId)
+            if (holder != null && layoutResId != 0) {
+                adapter = BaseRecyclerAdapter(context, layoutResId)
                 adapter.holder = holder
             }
             return adapter

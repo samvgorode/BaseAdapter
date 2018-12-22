@@ -17,7 +17,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val adapter = BaseRecyclerAdapter<String>()
             .AdapterBuilder(this)
-            .setList(arrayListOf("First", "Second"))
             .setHolder<TestViewHolder<String>>(R.layout.test_list_item)
             .build()?.also {
                 it.setOnItemClickListener { item ->
