@@ -118,9 +118,8 @@ class BaseRecyclerAdapter<T> constructor() : RecyclerView.Adapter<BaseViewHolder
         }
         fun build(): BaseRecyclerAdapter<T>? {
             var adapter: BaseRecyclerAdapter<T>? = null
-            if (holder != null && items != null && layoutResId != 0 && holder != null) {
-                adapter =
-                        BaseRecyclerAdapter(context, items, layoutResId)
+            if (holder != null && items != null && layoutResId != 0) {
+                adapter = BaseRecyclerAdapter(context, items, layoutResId)
                 adapter.holder = holder
             }
             return adapter
